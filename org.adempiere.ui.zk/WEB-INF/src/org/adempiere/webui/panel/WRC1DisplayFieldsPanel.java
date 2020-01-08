@@ -27,7 +27,6 @@ import org.adempiere.webui.util.ZKUpdateUtil;
 import org.compiere.print.MPrintFormat;
 import org.compiere.print.MPrintFormatItem;
 import org.compiere.util.KeyNamePair;
-import org.compiere.util.Language;
 import org.compiere.util.Util;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -123,7 +122,7 @@ public class WRC1DisplayFieldsPanel extends WRCTabPanel implements EventListener
 			row.appendChild(m_chkboxes[i]);
 			
 			m_textBoxes[i] = new Textbox();
-			String strValue = printItem.getPrintName(Language.getLoginLanguage()); 
+			String strValue = printItem.getPrintName(); 
 			if(strValue ==null || strValue.length()==0){
 				strValue = printItem.getName();
 			}
@@ -142,7 +141,7 @@ public class WRC1DisplayFieldsPanel extends WRCTabPanel implements EventListener
 		 int i=0;
 		 for (MPrintFormatItem item : m_pfi){
 			 item.setIsActive(m_chkboxes[i].isChecked());
-			 item.setPrintName(Language.getLoginLanguage(), m_textBoxes[i].getText());
+			 item.setPrintName(m_textBoxes[i].getText());
 			 item.saveEx();
 			 i++;
 		 }
@@ -177,8 +176,8 @@ public class WRC1DisplayFieldsPanel extends WRCTabPanel implements EventListener
 			}
 			String printname = m_textBoxes[i].getValue();
 			if (!Util.isEmpty(printname))
-				if (! printname.equals(m_pfi.get(i).getPrintName(Language.getLoginLanguage())))
-					m_pfi.get(i).setPrintName(Language.getLoginLanguage(), m_textBoxes[i].getValue());
+				if (! printname.equals(m_pfi.get(i).getPrintName()))
+					m_pfi.get(i).setPrintName(m_textBoxes[i].getValue());
 		}
 	}
 	

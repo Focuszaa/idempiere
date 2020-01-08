@@ -413,7 +413,7 @@ public class Process {
 						{
 							CharArrayWriter wr = new CharArrayWriter();
 							ok = ReportEngineEx.createEXCEL_HTML_wr( re, m_cs.getCtx(), wr, false, re.getPrintFormat().getLanguage() );
-							file_type ="html";
+							file_type ="xls";
 							String data = wr.toString();
 							if (data!=null)
 								r.setData(data.getBytes());

@@ -524,7 +524,6 @@ public final class AEnv
 
     /**
      * @return boolean
-     * @deprecated See IDEMPIERE-1022
      */
     public static boolean isBrowserSupported() {
     	Execution execution = Executions.getCurrent();

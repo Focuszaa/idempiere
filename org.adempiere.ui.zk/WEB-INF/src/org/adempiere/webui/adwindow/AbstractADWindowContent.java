@@ -657,7 +657,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	}
 
 	private void initFirstTabpanel() {
-		adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, adTabbox.getSelectedGridTab().getMaxQueryRecords());
+		adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, MRole.getDefault().getMaxQueryRecords());
 		adTabbox.getSelectedTabpanel().activate(true);
 		Events.echoEvent(new Event(ADTabpanel.ON_POST_INIT_EVENT, adTabbox.getSelectedTabpanel()));
 	}
@@ -705,7 +705,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
             		mTab.getTableName(), MRole.SQL_NOTQUALIFIED, MRole.SQL_RO);
             int no = DB.getSQLValue(null, finalSQL.toString());
             //
-            require = mTab.isQueryRequire(no);
+            require = MRole.getDefault().isQueryRequire(no);
         }
         // Show Query
         if (require)
@@ -1342,6 +1342,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 		toolbar.getButton("Attachment").setPressed(adTabbox.getSelectedGridTab().hasAttachment());
 		toolbar.getButton("PostIt").setPressed(adTabbox.getSelectedGridTab().hasPostIt());
 		toolbar.getButton("Chat").setPressed(adTabbox.getSelectedGridTab().hasChat());
+		toolbar.getButton("Find").setPressed(adTabbox.getSelectedGridTab().isQueryActive());
 
 		if (toolbar.isPersonalLock)
 		{
@@ -1360,9 +1361,6 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
             toolbar.enableProcessButton(!isNewRow && adtab != null && adtab.getToolbarButtons().size() > 0);
             toolbar.enableCustomize(adtab.isGridView());
         }
-        
-		toolbar.getButton("Find").setPressed(adTabbox.getSelectedGridTab().isQueryActive() || 
-				(!isNewRow && (m_onlyCurrentRows || m_onlyCurrentDays > 0)));
 
 	}
 
@@ -1709,6 +1707,8 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
         	toolbar.enablePostIt(false);
         }
 
+        toolbar.getButton("Find").setPressed(adTabbox.getSelectedGridTab().isQueryActive());
+
         // Elaine 2008/12/05
         //  Lock Indicator
         if (toolbar.isPersonalLock)
@@ -1727,9 +1727,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
         toolbar.enableZoomAcross(!isNewRow);
         toolbar.enableActiveWorkflows(!isNewRow);
         toolbar.enableRequests(!isNewRow);
-		toolbar.getButton("Find").setPressed(adTabbox.getSelectedGridTab().isQueryActive() || 
-				(!isNewRow && (m_onlyCurrentRows || m_onlyCurrentDays > 0)));
-
+        
         toolbar.enablePrint(adTabbox.getSelectedGridTab().isPrinted() && !isNewRow);
         toolbar.enableReport(!isNewRow);
         toolbar.enableExport(!isNewRow && !adTabbox.getSelectedGridTab().isSortTab());
@@ -2060,7 +2058,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 				        {
 				            m_onlyCurrentRows = false;          //  search history too
 				            adTabbox.getSelectedGridTab().setQuery(query);
-				            adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, adTabbox.getSelectedGridTab().getMaxQueryRecords());   //  autoSize
+				            adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, MRole.getDefault().getMaxQueryRecords());   //  autoSize
 				        }
 
 				        if (findWindow.isCreateNew())

@@ -428,19 +428,6 @@ public interface I_AD_Tab
 	  */
 	public boolean isTranslationTab();
 
-    /** Column name MaxQueryRecords */
-    public static final String COLUMNNAME_MaxQueryRecords = "MaxQueryRecords";
-
-	/** Set Max Query Records.
-	  * If defined, you cannot query more records as defined - the query criteria needs to be changed to query less records
-	  */
-	public void setMaxQueryRecords (int MaxQueryRecords);
-
-	/** Get Max Query Records.
-	  * If defined, you cannot query more records as defined - the query criteria needs to be changed to query less records
-	  */
-	public int getMaxQueryRecords();
-
     /** Column name Name */
     public static final String COLUMNNAME_Name = "Name";
 

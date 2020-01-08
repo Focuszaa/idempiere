@@ -19,14 +19,18 @@ import java.util.Properties;
 
 import javax.servlet.ServletRequest;
 
+import org.adempiere.webui.apps.AEnv;
 import org.adempiere.webui.part.AbstractUIPart;
 import org.adempiere.webui.theme.ThemeManager;
+import org.adempiere.webui.util.ZKUpdateUtil;
 import org.adempiere.webui.window.LoginWindow;
 import org.zkoss.web.servlet.Servlets;
+import org.zkoss.zhtml.Text;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.metainfo.PageDefinition;
 import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.East;
 import org.zkoss.zul.North;
 import org.zkoss.zul.South;
@@ -63,7 +67,6 @@ public class WLogin extends AbstractUIPart
         loginWindow = (LoginWindow) loginPage.getFellow("loginWindow");
         loginWindow.init(app);
 
-        /* IDEMPIERE-1022 - deprecated message
         if (!AEnv.isBrowserSupported())
         {
         	//TODO: localization
@@ -78,7 +81,6 @@ public class WLogin extends AbstractUIPart
         	browserWarningWindow.setPage(page);
         	browserWarningWindow.doOverlapped();
         }
-        */
         
         boolean mobile = false;        
 		if (Executions.getCurrent().getBrowser("mobile") !=null) {

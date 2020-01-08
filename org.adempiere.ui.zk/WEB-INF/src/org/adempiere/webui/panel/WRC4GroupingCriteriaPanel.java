@@ -25,7 +25,6 @@ import org.adempiere.webui.component.Rows;
 import org.adempiere.webui.component.Window;
 import org.adempiere.webui.util.ZKUpdateUtil;
 import org.compiere.print.MPrintFormatItem;
-import org.compiere.util.Language;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -125,7 +124,7 @@ public class WRC4GroupingCriteriaPanel extends WRCTabPanel implements EventListe
 			m_chkboxes[i].setChecked(orderfield.get(i).isGroupBy());
 			m_chkboxes[i].addEventListener(Events.ON_CHECK, this);
 
-			String strValue = orderfield.get(i).getPrintName(Language.getLoginLanguage()); 
+			String strValue = orderfield.get(i).getPrintName(); 
 			if(strValue ==null || strValue.length()==0){
 				strValue = orderfield.get(i).getName();
 			}
